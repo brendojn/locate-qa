@@ -68,6 +68,20 @@ class User extends model
         }
     }
 
+    public function getUserById($id)
+    {
+        $sql = "SELECT id FROM users WHERE id = '$id'";
+        $sql = $this->db->query($sql);
+
+        if ($sql->rowCount() > 0) {
+            $sql = $sql->fetch();
+
+            return $sql['id'];
+        } else {
+            return '';
+        }
+    }
+
     public function getUsers()
     {
         $array = array();

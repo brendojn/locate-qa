@@ -28,9 +28,9 @@ class Task extends model
 
         $sql = "SELECT t.task, e.name, c.fibonacci, t.points FROM tasks t 
                 JOIN employees e 
-                ON (e.id = t.id_employee)
+                ON (e.id = t.fk_employee_id)
                 JOIN complexities c 
-                ON (c.id = t.id_complexity) 
+                ON (c.id = t.fk_complexity_id) 
                 WHERE task = '$task'";
 
         $sql = $this->db->query($sql);
@@ -46,11 +46,11 @@ class Task extends model
     {
         $array = array();
 
-        $sql = "SELECT t.task, e.name, c.fibonacci, t.points FROM tasks t 
+        $sql = "SELECT t.id, t.task, e.name, c.fibonacci, t.points FROM tasks t 
                 JOIN employees e 
-                ON (e.id = t.id_employee)
+                ON (e.id = t.fk_employee_id)
                 JOIN complexities c 
-                ON (c.id = t.id_complexity)";
+                ON (c.id = t.fk_complexity_id)";
 
         $sql = $this->db->query($sql);
 
@@ -63,7 +63,7 @@ class Task extends model
 
     public function getTasksByIdEmployee($employee)
     {
-        $sql = "SELECT * FROM tasks WHERE id_employee = '$employee' ";
+        $sql = "SELECT * FROM tasks WHERE fk_employee_id = '$employee' ";
 
         $sql = $this->db->query($sql);
 
@@ -82,7 +82,7 @@ class Task extends model
 
     public function editTasks($task, $employee, $complexity)
     {
-        $sql = "UPDATE tasks SET id_employee = '$employee', id_complexity = '$complexity' WHERE task = '$task'";
+        $sql = "UPDATE tasks SET fk_employee_id = '$employee', fk_complexity_id = '$complexity' WHERE task = '$task'";
         $sql = $this->db->query($sql);
 
         header("Location: " . BASE_URL . "tasks");
