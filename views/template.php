@@ -14,7 +14,7 @@
 		<nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="<?php echo BASE_URL; ?>" class="navbar-brand">Classificados</a>
+                    <a href="<?php echo BASE_URL; ?>" class="navbar-brand">123Milhas - Pagamento de Metas</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_SESSION['logged']) && !empty($_SESSION['logged'])): ?>

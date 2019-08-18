@@ -32,7 +32,13 @@ if(empty($_SESSION['logged'])) {
                 <td>
                     <a href="<?php echo BASE_URL; ?>tasks/edit/<?php echo $task['task']; ?>"class="btn btn-default">Editar</a>
                     <a href="tasks/delete?task=<?php echo $task['task']; ?>" class="btn btn-danger">Excluir</a>
+                    <?php if ($task['evaluate'] == 0) : ?>
                     <a href="<?php echo BASE_URL; ?>tasks/evaluate/<?php echo $task['id']; ?>"class="btn btn-info">Avaliar</a>
+                    <?php elseif($task['pay'] == 0): ?>
+                    <a href="<?php echo BASE_URL; ?>tasks/pay/<?php echo $task['id']; ?>"class="btn btn-info">Pagamento</a>
+                    <?php else : ?>
+                    <a href="<?php echo BASE_URL; ?>tasks/info/<?php echo $task['id']; ?>"class="btn btn-info">Informações</a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

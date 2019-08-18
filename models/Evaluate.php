@@ -7,13 +7,14 @@ class Evaluate extends model
 
         $config_time = $time * 5;
 
-        $config_process = (($automation + $lighthouse + $trello + $jira + $testrail ) * 2) * 2; // Ver como melhorar
+        $config_process = ($automation + $lighthouse + $trello + $jira + $testrail ) * 2;
 
         $config_bugs = $bugs * 5;
 
         $config_impact = $impact * 60;
 
         $total = $config_bugs + $config_impact + $config_process + $config_time;
+
 
         $sql = "SELECT * FROM tasks WHERE id = '$task' AND evaluate = '0'";
         $sql = $this->db->query($sql);

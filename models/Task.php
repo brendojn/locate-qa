@@ -46,7 +46,7 @@ class Task extends model
     {
         $array = array();
 
-        $sql = "SELECT t.id, t.task, e.name, c.fibonacci, t.points FROM tasks t 
+        $sql = "SELECT t.id, t.task, e.name, c.fibonacci, t.points, t.evaluate, t.pay FROM tasks t 
                 JOIN employees e 
                 ON (e.id = t.fk_employee_id)
                 JOIN complexities c 

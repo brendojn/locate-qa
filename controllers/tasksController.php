@@ -121,4 +121,32 @@ class tasksController extends controller
 
     }
 
+    public function pay($task)
+    {
+        $data = array(
+            'user_id' => ''
+        );
+
+        $e = new Evaluate();
+        $u = new User();
+
+        $data['user_id'] = $u->getUserById($_SESSION['logged']);
+
+        if (isset($_POST['time']) && !empty($_POST['time'])) {
+            $user = addslashes($data['user_id']);
+            $time = addslashes($_POST['time']);
+            $automation = addslashes($_POST['automation']);
+
+
+            $e->addEvaluate($user, $task, $time, $automation, $lighthouse, $trello, $jira, $testrail, $bugs, $impact);
+
+            header("Location: " . BASE_URL . "tasks");
+
+        }
+
+        $this->loadTemplate('evaluate-tasks', $data);
+
+    }
+
+
 }
