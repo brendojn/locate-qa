@@ -20,13 +20,12 @@ class tasksController extends controller
 
         $data['tasks'] = $tasks;
 
-
         $this->loadTemplate('tasks', $data);
     }
 
     public function add()
     {
-        $dados = array();
+        $data = array();
 
         $t = new Task();
         $e = new Employee();
@@ -41,12 +40,12 @@ class tasksController extends controller
             $dados['erro'] = $t->createTasks($employee, $complexity, $task);
         }
 
-        $dados['employees'] = $e->getEmployees();
+        $data['employees'] = $e->getEmployees();
 
-        $dados['complexities'] = $c->getComplexities();
+        $data['complexities'] = $c->getComplexities();
 
 
-        $this->loadTemplate('add-tasks', $dados);
+        $this->loadTemplate('add-tasks', $data);
     }
 
 
@@ -61,29 +60,32 @@ class tasksController extends controller
         header("Location: " . BASE_URL . "tasks");
     }
 
-    public function edit()
+    public function edit($task)
     {
 
-        $dados = array();
+        $data = array();
 
         $t = new Task();
         $e = new Employee();
         $c = new Complexity();
 
-        if (isset($_POST['task']) && !empty($_POST['task'])) {
+        if (isset($_POST['employee']) && !empty($_POST['employee'])) {
+
             $employee = addslashes($_POST['employee']);
             $complexity = addslashes($_POST['complexity']);
 
-            $t->editTasks($_GET['task'], $employee, $complexity);
+            $t->editTasks($task, $employee, $complexity);
+            header("Location: " . BASE_URL . "tasks");
+
         }
 
-        $dados['getTask'] = $t->getTask($_GET['task']);
+        $data['getTask'] = $t->getTask($task);
 
-        $dados['employees'] = $e->getEmployees();
+        $data['employees'] = $e->getEmployees();
 
-        $dados['complexities'] = $c->getComplexities();
+        $data['complexities'] = $c->getComplexities();
 
-        $this->loadTemplate('edit-tasks', $dados);
+        $this->loadTemplate('edit-tasks', $data);
 
     }
 

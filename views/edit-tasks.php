@@ -13,7 +13,7 @@ if (empty($_SESSION['logged'])) {
 
         <div class="form-group">
             <label for="task">Nome da Tarefa:</label>
-            <input type="text" name="task" id="task" class="form-control" value="<?php echo $_GET['task']; ?>"
+            <input type="text" name="task" id="task" class="form-control" value="<?php echo $getTask['task']; ?>"
                    disabled/>
         </div>
         <div class="form-group">

@@ -30,7 +30,7 @@ if(empty($_SESSION['logged'])) {
                 <td><?php echo $task['fibonacci']; ?></td>
                 <td><?php echo $task['points']; ?> %</td>
                 <td>
-                    <a href="tasks/edit?task=<?php echo $task['task']; ?>" class="btn btn-default">Editar</a>
+                        <a href="<?php echo BASE_URL; ?>tasks/edit/<?php echo $task['task']; ?>"class="btn btn-default">Editar</a>
                     <a href="tasks/delete?task=<?php echo $task['task']; ?>" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
