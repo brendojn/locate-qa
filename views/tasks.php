@@ -11,10 +11,10 @@ if (empty($_SESSION['logged'])) {
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-xs-12 col-xs-offset">
+            <div class="col-xs-10 col-xs-offset-0">
                 <h4>Filtros avançados</h4>
                 <form method="GET">
-                    <div class="col-xs-3">
+                    <div class="col-xs-3 col-xs-offset-0">
                         <label for="employee">QA's:</label>
                         <select id="employee" name="filters[employee]" class="form-control">
                             <option></option>
