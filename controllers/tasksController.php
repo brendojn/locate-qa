@@ -96,8 +96,8 @@ class tasksController extends controller
 
         $data['complexities'] = $c->getComplexities();
 
-        $this->loadTemplate('edit-tasks', $data);
 
+        $this->loadTemplate('edit-tasks', $data);
     }
 
     public function evaluate($task)

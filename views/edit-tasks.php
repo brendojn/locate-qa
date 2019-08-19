@@ -37,7 +37,8 @@ if (empty($_SESSION['logged'])) {
                 foreach ($complexities as $complexity):
                     ?>
                     <label><input type="radio" name="complexity"
-                                  value="<?php echo $complexity['id']; ?>"/><?php echo utf8_encode($complexity['fibonacci']); ?>
+                            value="<?php echo $complexity['id']; ?>"
+                            <?php echo $getTask['id_complexity'] == $complexity['id'] ? 'checked="checked"' : ''; ?> > <?php echo utf8_encode($complexity['fibonacci']); ?>
                     </label>
                 <?php
                 endforeach;
