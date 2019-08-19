@@ -23,7 +23,7 @@ if (empty($_SESSION['logged'])) {
                 foreach ($employees as $employee):
                     ?>
                     <option value="<?php echo $employee['id']; ?>"
-                    <?php echo $getTask['id'] == $employee['id'] ? 'selected' : ''; ?> ><?php echo utf8_encode($employee['name']); ?></option>
+                        <?php echo $getTask['id'] == $employee['id'] ? 'selected' : ''; ?> ><?php echo utf8_encode($employee['name']); ?></option>
                 <?php
                 endforeach;
                 ?>
@@ -37,7 +37,7 @@ if (empty($_SESSION['logged'])) {
                 foreach ($complexities as $complexity):
                     ?>
                     <label><input type="radio" name="complexity"
-                            value="<?php echo $complexity['id']; ?>"
+                                  value="<?php echo $complexity['id']; ?>"
                             <?php echo $getTask['id_complexity'] == $complexity['id'] ? 'checked="checked"' : ''; ?> > <?php echo utf8_encode($complexity['fibonacci']); ?>
                     </label>
                 <?php
