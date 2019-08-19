@@ -1,7 +1,7 @@
 <?php
-if(empty($_SESSION['logged'])) {
+if (empty($_SESSION['logged'])) {
     ?>
-    <script type="text/javascript">window.location.href="<?php echo BASE_URL; ?>login";</script>
+    <script type="text/javascript">window.location.href = "<?php echo BASE_URL; ?>login";</script>
     <?php
     exit;
 }
@@ -12,61 +12,62 @@ if(empty($_SESSION['logged'])) {
 
         <div class="row">
             <div class="col-sm-3">
-                <h4>Filtros</h4>
+                <h4>Filtros avançados</h4>
                 <form method="GET">
                     <div class="form-group">
                         <label for="employee">QA's:</label>
-                        <select id="employee" name="filtros[employee]" class="form-control">
+                        <select id="employee" name="filters[employee]" class="form-control">
                             <option></option>
                             <?php foreach ($employees as $employee): ?>
                                 <option value="<?php echo $employee['id']; ?>" <?php echo ($employee['id'] == $filters['employee']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($employee['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <a href="<?php echo BASE_URL; ?>tasks/add" class="btn btn-default">Adicionar Tarefa</a>
-                        <input type="submit" class="btn btn-info" value="Aplicar filtros"/>
+                        <input type="submit" class="btn btn-info" value="Aplicar filtro(s)"/>
                     </div>
-
                 </form>
-
-
             </div>
-            <br/><br/><br/><br/><br/><br/><br/><br/>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Tester</th>
-            <th>Complexidade</th>
-            <th>Pontos</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <?php
-        foreach($tasks as $task):
-            ?>
-            <tr>
-                <td><?php echo $task['task']; ?></td>
-                <td><?php echo $task['name']; ?></td>
-                <td><?php echo $task['fibonacci']; ?></td>
-                <td><?php echo $task['points']; ?> %</td>
-                <td>
-                    <?php if ($task['pay'] == 0) : ?>
-                    <a href="<?php echo BASE_URL; ?>tasks/edit/<?php echo $task['task']; ?>"class="btn btn-default">Editar</a>
-                    <a href="tasks/delete?task=<?php echo $task['task']; ?>" class="btn btn-danger">Excluir</a>
-                    <?php endif; ?>
-                    <?php if ($task['evaluate'] == 0) : ?>
-                    <a href="<?php echo BASE_URL; ?>tasks/evaluate/<?php echo $task['id']; ?>"class="btn btn-info">Avaliar</a>
-                    <?php elseif($task['pay'] == 0): ?>
-                    <a href="<?php echo BASE_URL; ?>tasks/pay/<?php echo $task['id']; ?>"class="btn btn-info">Pagar</a>
-                    <?php else : ?>
-                    <a href="<?php echo BASE_URL; ?>tasks/info/<?php echo $task['id']; ?>"class="btn btn-info">Informações</a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
+        </div>
+    </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tester</th>
+                    <th>Complexidade</th>
+                    <th>Pontos</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <?php
+                foreach ($tasks as $task):
+                    ?>
+                    <tr>
+                        <td><?php echo $task['task']; ?></td>
+                        <td><?php echo $task['name']; ?></td>
+                        <td><?php echo $task['fibonacci']; ?></td>
+                        <td><?php echo $task['points']; ?> %</td>
+                        <td>
+                            <?php if ($task['pay'] == 0) : ?>
+                                <a href="<?php echo BASE_URL; ?>tasks/edit/<?php echo $task['task']; ?>"
+                                   class="btn btn-default">Editar</a>
+                                <a href="tasks/delete?task=<?php echo $task['task']; ?>"
+                                   class="btn btn-danger">Excluir</a>
+                            <?php endif; ?>
+                            <?php if ($task['evaluate'] == 0) : ?>
+                                <a href="<?php echo BASE_URL; ?>tasks/evaluate/<?php echo $task['id']; ?>"
+                                   class="btn btn-info">Avaliar</a>
+                            <?php elseif ($task['pay'] == 0): ?>
+                                <a href="<?php echo BASE_URL; ?>tasks/pay/<?php echo $task['id']; ?>"
+                                   class="btn btn-info">Pagar</a>
+                            <?php else : ?>
+                                <a href="<?php echo BASE_URL; ?>tasks/info/<?php echo $task['id']; ?>"
+                                   class="btn btn-info">Informações</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>

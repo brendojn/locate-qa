@@ -5,6 +5,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>Goals</title>
 	    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo BASE_URL; ?>assets/css/template.css" rel="stylesheet">
     </head>
     <body>
 		<nav class="navbar navbar-inverse">
@@ -21,8 +22,10 @@
 			</div>
 		</nav>
 		<div class="container">
-	        <h1>Seja bem vindo(a)</h1>
-			<h4>Sistema de pagamento de metas do 123Milhas/BuscaFácil</h4>
-	    </div>
+            <h2>SISTEMA DE PAGAMENTO DE METAS - 123MILHAS/BUSCAFÁCIL</h2>
+            <p>
+            <img src="<?php echo BASE_URL; ?>assets/images/logo-123Milhas.png" id="centro" />
+            </p>
+        </div>
     </body>
 </html>

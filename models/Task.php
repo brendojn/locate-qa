@@ -10,7 +10,8 @@ class Task extends model
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() == 0) {
-            $sql = "INSERT INTO tasks SET id_employee = '$employee', id_complexity = '$complexity', task = '$task', points = '$points'";
+            $sql = "INSERT INTO tasks SET fk_employee_id = '$employee', fk_complexity_id = '$complexity', task = '$task', points = '$points'";
+
             $sql = $this->db->query($sql);
 
 
@@ -63,19 +64,31 @@ class Task extends model
 
     }
 
-    public function getTasks()
+    public function getTasks($filters)
     {
         $array = array();
 
-        $sql = "SELECT t.id, t.task, e.name, c.fibonacci, t.points, t.evaluate, t.pay FROM tasks t 
+        $filtrostring = array('1=1');
+
+        if(!empty($filters['employee'])) {
+            $filtrostring[] = 't.fk_employee_id = :id_employee';
+        }
+
+
+        $sql = $this->db->prepare("SELECT t.id, t.task, e.name, c.fibonacci, t.points, t.evaluate, t.pay FROM tasks t 
                 JOIN employees e 
                 ON (e.id = t.fk_employee_id)
                 JOIN complexities c 
-                ON (c.id = t.fk_complexity_id)";
+                ON (c.id = t.fk_complexity_id)
+                WHERE " . implode(' AND ', $filtrostring));
 
-        $sql = $this->db->query($sql);
+        if(!empty($filters['employee'])) {
+            $sql->bindValue(':id_employee', $filters['employee']);
+        }
 
-        if ($sql->rowCount() > 0) {
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
             $array = $sql->fetchAll();
         }
 

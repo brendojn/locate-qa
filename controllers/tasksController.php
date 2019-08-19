@@ -11,15 +11,25 @@ class tasksController extends controller
 
     public function index()
     {
-
         $data = array();
 
         $t = new Task();
         $p = new Payment();
+        $e = new Employee();
 
-        $tasks = $t->getTasks();
+        $filters = array(
+            'employee' => ''
+        );
+
+        if (isset($_GET['filters'])) {
+            $filters = $_GET['filters'];
+        }
+
+        $tasks = $t->getTasks($filters);
 
         $data['tasks'] = $tasks;
+        $data['employees'] = $e->getEmployees();
+        $data['filters'] = $filters;
 
         $this->loadTemplate('tasks', $data);
     }
