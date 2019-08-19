@@ -22,6 +22,27 @@ class Task extends model
 
     }
 
+
+    public function getTaskById($id)
+    {
+        $array = array();
+
+        $sql = "SELECT t.task, e.name, c.fibonacci, t.points FROM tasks t 
+                JOIN employees e 
+                ON (e.id = t.fk_employee_id)
+                JOIN complexities c 
+                ON (c.id = t.fk_complexity_id) 
+                WHERE t.id = '$id'";
+
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+        }
+
+        return $array;
+
+    }
+
     public function getTask($task)
     {
         $array = array();

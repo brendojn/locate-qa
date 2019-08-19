@@ -15,8 +15,11 @@ class tasksController extends controller
         $data = array();
 
         $t = new Task();
+        $p = new Payment();
 
         $tasks = $t->getTasks();
+
+        $payments = $p->getPays();
 
         $data['tasks'] = $tasks;
 
@@ -127,24 +130,46 @@ class tasksController extends controller
             'user_id' => ''
         );
 
-        $e = new Evaluate();
+
+        $t = new Task();
         $u = new User();
+        $p = new Payment();
 
         $data['user_id'] = $u->getUserById($_SESSION['logged']);
 
-        if (isset($_POST['time']) && !empty($_POST['time'])) {
+        if (isset($_POST['value']) && !empty($_POST['value'])) {
             $user = addslashes($data['user_id']);
-            $time = addslashes($_POST['time']);
-            $automation = addslashes($_POST['automation']);
+            $value = addslashes($_POST['value']);
 
 
-            $e->addEvaluate($user, $task, $time, $automation, $lighthouse, $trello, $jira, $testrail, $bugs, $impact);
+            $percent = $t->getTaskById($task);
+            $p->payTask($task, $user, $value, $percent['points']);
 
             header("Location: " . BASE_URL . "tasks");
-
         }
 
-        $this->loadTemplate('evaluate-tasks', $data);
+        $data['task'] = $t->getTaskById($task);
+
+        $this->loadTemplate('pay-tasks', $data);
+
+    }
+
+    public function info($task)
+    {
+
+        $t = new Task();
+        $u = new User();
+        $p = new Payment();
+
+        $data['payments'] = $p->getPayment($task);
+
+        $data['final_value'] = $p->getPay($task);
+
+        $data['task'] = $t->getTaskById($task);
+
+
+
+        $this->loadTemplate('info-tasks', $data);
 
     }
 
