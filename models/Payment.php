@@ -44,9 +44,10 @@ class Payment extends model
 
         $array = array();
 
-        $sql = "SELECT * FROM payments p
-                JOIN tasks t
-                ON (t.id = p.fk_task_id)
+        $sql = "SELECT u.user
+                FROM payments p
+                JOIN tasks t ON (t.id = p.fk_task_id)
+                JOIN users u ON (u.id = p.fk_user_id)
                 WHERE t.id = '$task'";
 
         $sql = $this->db->query($sql);

@@ -31,6 +31,24 @@ class Evaluate extends model
             return "Tarefa já se encontra avaliada";
         }
     }
+
+    public function getEvaluate($task)
+    {
+        $array = array();
+
+        $sql = "SELECT u.user
+                FROM evaluates e
+                JOIN tasks t ON (t.id = e.fk_task_id)
+                JOIN users u ON (u.id = e.fk_user_id)
+                WHERE t.id = '$task'";
+
+        $sql = $this->db->query($sql);
+
+        $array = $sql->fetch();
+
+        return $array;
+    }
+
 }
 
 

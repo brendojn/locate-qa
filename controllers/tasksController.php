@@ -19,8 +19,6 @@ class tasksController extends controller
 
         $tasks = $t->getTasks();
 
-        $payments = $p->getPays();
-
         $data['tasks'] = $tasks;
 
         $this->loadTemplate('tasks', $data);
@@ -158,10 +156,12 @@ class tasksController extends controller
     {
 
         $t = new Task();
-        $u = new User();
+        $e = new Evaluate();
         $p = new Payment();
 
         $data['payments'] = $p->getPayment($task);
+
+        $data['evaluates'] = $e->getEvaluate($task);
 
         $data['final_value'] = $p->getPay($task);
 

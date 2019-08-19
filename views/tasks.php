@@ -7,9 +7,33 @@ if(empty($_SESSION['logged'])) {
 }
 ?>
 <div class="container">
-    <h1>Tarefas</h1>
 
-    <a href="<?php echo BASE_URL; ?>tasks/add" class="btn btn-default">Adicionar Tarefa</a>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-3">
+                <h4>Filtros</h4>
+                <form method="GET">
+                    <div class="form-group">
+                        <label for="employee">QA's:</label>
+                        <select id="employee" name="filtros[employee]" class="form-control">
+                            <option></option>
+                            <?php foreach ($employees as $employee): ?>
+                                <option value="<?php echo $employee['id']; ?>" <?php echo ($employee['id'] == $filters['employee']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($employee['name']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <a href="<?php echo BASE_URL; ?>tasks/add" class="btn btn-default">Adicionar Tarefa</a>
+                        <input type="submit" class="btn btn-info" value="Aplicar filtros"/>
+                    </div>
+
+                </form>
+
+
+            </div>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
 
     <table class="table table-striped">
         <thead>
