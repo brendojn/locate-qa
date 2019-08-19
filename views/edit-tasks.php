@@ -19,11 +19,11 @@ if (empty($_SESSION['logged'])) {
         <div class="form-group">
             <label for="employee">QA:</label>
             <select name="employee" id="employee" class="form-control">
-                <option selected><?php echo utf8_encode($getTask['name']); ?></option>
                 <?php
                 foreach ($employees as $employee):
                     ?>
-                    <option value="<?php echo $employee['id']; ?>"><?php echo utf8_encode($employee['name']); ?></option>
+                    <option value="<?php echo $employee['id']; ?>"
+                    <?php echo $getTask['id'] == $employee['id'] ? 'selected' : ''; ?> ><?php echo utf8_encode($employee['name']); ?></option>
                 <?php
                 endforeach;
                 ?>
