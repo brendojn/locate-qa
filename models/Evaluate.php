@@ -15,6 +15,10 @@ class Evaluate extends model
 
         $total = $config_bugs + $config_impact + $config_process + $config_time;
 
+        if ($total > 100) {
+            $total = 100;
+        }
+
 
         $sql = "SELECT * FROM tasks WHERE id = '$task' AND evaluate = '0'";
         $sql = $this->db->query($sql);
