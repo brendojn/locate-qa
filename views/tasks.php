@@ -15,13 +15,8 @@ if (empty($_SESSION['logged'])) {
                 <h4>Filtros avançados</h4>
                 <form method="GET">
                     <div class="col-xs-3 col-xs-offset-0">
-                        <label for="employee">QA's:</label>
-                        <select id="employee" name="filters[employee]" class="form-control">
-                            <option></option>
-                            <?php foreach ($employees as $employee): ?>
-                                <option value="<?php echo $employee['id']; ?>" <?php echo ($employee['id'] == $filters['employee']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($employee['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <label for="task">Buscar tarefa:</label>
+                        <input type="text" name="filters[task]" id="task" class="form-control" placeholder="Nome da tarefa"/>
                     </div>
                     <div class="col-xs-3 col-xs-offset-1">
                         <label for="employee">QA's:</label>
@@ -33,12 +28,18 @@ if (empty($_SESSION['logged'])) {
                         </select>
                     </div>
                     <div class="col-xs-3 col-xs-offset-1">
-                        <label for="employee">QA's:</label>
-                        <select id="employee" name="filters[employee]" class="form-control">
+                        <label for="status">Status da Tarefa:</label>
+                        <select id="status" name="filters[status]" class="form-control">
                             <option></option>
-                            <?php foreach ($employees as $employee): ?>
-                                <option value="<?php echo $employee['id']; ?>" <?php echo ($employee['id'] == $filters['employee']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($employee['name']); ?></option>
-                            <?php endforeach; ?>
+                            <option value="1-1" <?php echo ($filters['status'] == '1-1') ? 'selected="selected"' : ''; ?>>
+                                Tarefas pagas
+                            </option>
+                            <option value="1-0" <?php echo ($filters['status'] == '1-0') ? 'selected="selected"' : ''; ?>>
+                                Tarefas avaliadas
+                            </option>
+                            <option value="0-0" <?php echo ($filters['status'] == '0-0') ? 'selected="selected"' : ''; ?>>
+                                Tarefas em aberto
+                            </option>
                         </select>
                     </div>
                     <br/>
@@ -72,9 +73,12 @@ if (empty($_SESSION['logged'])) {
                         <td><?php echo $task['fibonacci']; ?></td>
                         <td><?php echo $task['points']; ?> %</td>
                         <td>
-                            <?php if ($task['pay'] == 0) : ?>
+                            <?php if ($task['pay'] == 0 && $task['evaluate'] == 0) : ?>
                                 <a href="<?php echo BASE_URL; ?>tasks/edit/<?php echo $task['task']; ?>"
                                    class="btn btn-default">Editar</a>
+                                <a href="tasks/delete?task=<?php echo $task['task']; ?>"
+                                   class="btn btn-danger">Excluir</a>
+                            <?php elseif($task['pay'] == 0 && $task['evaluate'] == 1): ?>
                                 <a href="tasks/delete?task=<?php echo $task['task']; ?>"
                                    class="btn btn-danger">Excluir</a>
                             <?php endif; ?>

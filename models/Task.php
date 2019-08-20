@@ -74,6 +74,13 @@ class Task extends model
             $filtrostring[] = 't.fk_employee_id = :id_employee';
         }
 
+        if(!empty($filters['status'])) {
+            $filtrostring[] = 't.evaluate = :evaluate AND t.pay = :pay';
+        }
+
+        if(!empty($filters['task'])) {
+            $filtrostring[] = 't.task = :task';
+        }
 
         $sql = $this->db->prepare("SELECT t.id, t.task, e.name, c.fibonacci, t.points, t.evaluate, t.pay FROM tasks t 
                 JOIN employees e 
@@ -85,6 +92,20 @@ class Task extends model
         if (!empty($filters['employee'])) {
             $sql->bindValue(':id_employee', $filters['employee']);
         }
+
+        if(!empty($filters['status'])) {
+            $status = explode('-', $filters['status']);
+            $sql->bindValue(':evaluate', $status[0]);
+            $sql->bindValue(':pay', $status[1]);
+        }
+
+        if (!empty($filters['task'])) {
+            $sql->bindValue(':task', $filters['task']);
+        }
+
+//        print_r($sql);
+//        die();
+
 
         $sql->execute();
 

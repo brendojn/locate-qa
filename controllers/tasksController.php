@@ -18,7 +18,8 @@ class tasksController extends controller
         $e = new Employee();
 
         $filters = array(
-            'employee' => ''
+            'employee' => '',
+            'status' => ''
         );
 
         if (isset($_GET['filters'])) {
