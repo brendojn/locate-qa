@@ -96,4 +96,11 @@ if (empty($_SESSION['logged'])) {
                     </tr>
                 <?php endforeach; ?>
             </table>
-        </div>
+
+    <ul class="pagination">
+        <?php for ($q = 1; $q <= $total_pages; $q++): ?>
+            <li class="<?php echo ($p == $q) ? 'active' : ''; ?>">
+                <a href="<?php echo BASE_URL; ?>tasks?p=<?php echo $q; ?>"><?php echo $q; ?></a></li>
+        <?php endfor; ?>
+    </ul>
+</div>

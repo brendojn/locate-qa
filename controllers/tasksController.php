@@ -26,11 +26,23 @@ class tasksController extends controller
             $filters = $_GET['filters'];
         }
 
-        $tasks = $t->getTasks($filters);
+        $total_tasks = $t->getTotalTasks($filters);
 
+        $p = 1;
+        if (isset($_GET['p']) && !empty($_GET['p'])) {
+            $p = addslashes($_GET['p']);
+        }
+
+        $per_page = 6;
+        $total_pages = ceil($total_tasks / $per_page);
+
+        $tasks = $t->getTasks($p, $per_page, $filters);
+
+        $data['total_tasks'] = $total_tasks;
         $data['tasks'] = $tasks;
         $data['employees'] = $e->getEmployees();
         $data['filters'] = $filters;
+        $data['total_pages'] = $total_pages;
 
         $this->loadTemplate('tasks', $data);
     }

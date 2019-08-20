@@ -64,8 +64,50 @@ class Task extends model
 
     }
 
-    public function getTasks($filters)
+    public function getTotalTasks($filters)
     {
+        $array = array();
+
+        $filtrostring = array('1=1');
+
+        if (!empty($filters['employee'])) {
+            $filtrostring[] = 't.fk_employee_id = :id_employee';
+        }
+
+        if(!empty($filters['status'])) {
+            $filtrostring[] = 't.evaluate = :evaluate AND t.pay = :pay';
+        }
+
+        if(!empty($filters['task'])) {
+            $filtrostring[] = 't.task = :task';
+        }
+
+        $sql = $this->db->prepare("SELECT COUNT(*) as c FROM tasks WHERE ".implode(' AND ', $filtrostring));
+
+        if (!empty($filters['employee'])) {
+            $sql->bindValue(':id_employee', $filters['employee']);
+        }
+
+        if(!empty($filters['status'])) {
+            $status = explode('-', $filters['status']);
+            $sql->bindValue(':evaluate', $status[0]);
+            $sql->bindValue(':pay', $status[1]);
+        }
+
+        if (!empty($filters['task'])) {
+            $sql->bindValue(':task', $filters['task']);
+        }
+
+        $sql->execute();
+        $row = $sql->fetch();
+
+        return $row['c'];
+    }
+
+    public function getTasks($page, $per_page, $filters)
+    {
+        $offset = ($page - 1) * $per_page;
+
         $array = array();
 
         $filtrostring = array('1=1');
@@ -87,7 +129,7 @@ class Task extends model
                 ON (e.id = t.fk_employee_id)
                 JOIN complexities c 
                 ON (c.id = t.fk_complexity_id)
-                WHERE " . implode(' AND ', $filtrostring));
+                WHERE " . implode(' AND ', $filtrostring)." ORDER BY id DESC LIMIT $offset, $per_page");
 
         if (!empty($filters['employee'])) {
             $sql->bindValue(':id_employee', $filters['employee']);
