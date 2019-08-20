@@ -15,7 +15,7 @@ class loginController extends controller {
     		$password = md5($_POST['password']);
 
     		$u = new User();
-    		$data['erro'] = $u->logar($user, $password);
+    		$data['erro'] = $u->login($user, $password);
     	}
 
     	$this->loadView('login_entrar', $data);
@@ -29,7 +29,7 @@ class loginController extends controller {
     		$password = addslashes($_POST['password']);
 
     		$u = new User();
-    		$data['erro'] = $u->cadastrar($user, $password);
+    		$data['erro'] = $u->addUser($user, $password);
     	}
 
     	$this->loadView('login_cadastrar', $data);

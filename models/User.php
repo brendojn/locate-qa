@@ -3,7 +3,7 @@
 class User extends model
 {
 
-    public function verificarLogin()
+    public function verifyLogin()
     {
 
         if (!isset($_SESSION['logged']) || (isset($_SESSION['logged']) && empty($_SESSION['logged']))) {
@@ -13,7 +13,7 @@ class User extends model
 
     }
 
-    public function logar($user, $password)
+    public function login($user, $password)
     {
 
         $sql = "SELECT * FROM users WHERE user = '$user' AND password = '$password'";
@@ -32,7 +32,7 @@ class User extends model
 
     }
 
-    public function cadastrar($user, $password)
+    public function addUser($user, $password)
     {
 
         $sql = "SELECT * FROM users WHERE user = '$user'";

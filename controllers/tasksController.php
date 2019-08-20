@@ -6,7 +6,7 @@ class tasksController extends controller
     public function __construct()
     {
         $u = new User();
-        $u->verificarLogin();
+        $u->verifyLogin();
     }
 
     public function index()
