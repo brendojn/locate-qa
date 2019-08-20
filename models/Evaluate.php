@@ -5,13 +5,18 @@ class Evaluate extends model
     public function addEvaluate($user, $task, $time = 0, $automation = 0, $lighthouse = 0, $trello = 0, $jira = 0, $testrail = 0, $bugs = 0, $impact = 0)
     {
 
-        $config_time = $time * 5;
+        $sql = "SELECT * from configuration ORDER BY id DESC LIMIT 1";
+        $sql = $this->db->query($sql);
 
-        $config_process = ($automation + $lighthouse + $trello + $jira + $testrail ) * 2;
+        $row = $sql->fetch();
 
-        $config_bugs = $bugs * 5;
+        $config_time = $time * $row['config_time'];
 
-        $config_impact = $impact * 60;
+        $config_process = ($automation + $lighthouse + $trello + $jira + $testrail ) * $row['config_proccess'];
+
+        $config_bugs = $bugs * $row['config_bugs'];
+
+        $config_impact = $impact * $row['config_impact'];
 
         $total = $config_bugs + $config_impact + $config_process + $config_time;
 

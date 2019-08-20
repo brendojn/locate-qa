@@ -11,12 +11,8 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Copiando estrutura do banco de dados para goals
-CREATE DATABASE IF NOT EXISTS `goals` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `goals`;
-
 -- Copiando estrutura para tabela goals.complexities
+DROP TABLE IF EXISTS `complexities`;
 CREATE TABLE IF NOT EXISTS `complexities` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fibonacci` int(11) DEFAULT NULL,
@@ -34,14 +30,32 @@ INSERT INTO `complexities` (`id`, `fibonacci`) VALUES
 	(6, 13);
 /*!40000 ALTER TABLE `complexities` ENABLE KEYS */;
 
+-- Copiando estrutura para tabela goals.configuration
+DROP TABLE IF EXISTS `configuration`;
+CREATE TABLE IF NOT EXISTS `configuration` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `config_time` int(1) DEFAULT '0',
+  `config_proccess` int(1) DEFAULT '0',
+  `config_bugs` int(1) DEFAULT '0',
+  `config_impact` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela goals.configuration: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
+INSERT INTO `configuration` (`id`, `config_time`, `config_proccess`, `config_bugs`, `config_impact`) VALUES
+	(1, 5, 2, 5, 60);
+/*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela goals.employees
+DROP TABLE IF EXISTS `employees`;
 CREATE TABLE IF NOT EXISTS `employees` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela goals.employees: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela goals.employees: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
 INSERT INTO `employees` (`id`, `name`) VALUES
 	(1, 'Leonardo Padilha'),
@@ -54,6 +68,7 @@ INSERT INTO `employees` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela goals.evaluates
+DROP TABLE IF EXISTS `evaluates`;
 CREATE TABLE IF NOT EXISTS `evaluates` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fk_user_id` int(11) unsigned NOT NULL,
@@ -71,15 +86,14 @@ CREATE TABLE IF NOT EXISTS `evaluates` (
   KEY `fk_task_id` (`fk_task_id`),
   CONSTRAINT `fk_task_id` FOREIGN KEY (`fk_task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela goals.evaluates: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela goals.evaluates: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `evaluates` DISABLE KEYS */;
-INSERT INTO `evaluates` (`id`, `fk_user_id`, `fk_task_id`, `time`, `automation`, `lighthouse`, `trello`, `jira`, `testrail`, `bugs`, `impact`) VALUES
-	(16, 2, 12, 2, 1, 1, 0, 0, 0, 2, 0);
 /*!40000 ALTER TABLE `evaluates` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela goals.payments
+DROP TABLE IF EXISTS `payments`;
 CREATE TABLE IF NOT EXISTS `payments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fk_task_id` int(11) unsigned DEFAULT NULL,
@@ -91,15 +105,14 @@ CREATE TABLE IF NOT EXISTS `payments` (
   KEY `fk_task_idd` (`fk_task_id`),
   CONSTRAINT `fk_task_idd` FOREIGN KEY (`fk_task_id`) REFERENCES `tasks` (`id`),
   CONSTRAINT `fk_user_idd` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela goals.payments: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela goals.payments: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` (`id`, `fk_task_id`, `fk_user_id`, `value`, `final_value`) VALUES
-	(5, 12, 2, 2000, 1520);
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela goals.tasks
+DROP TABLE IF EXISTS `tasks`;
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fk_employee_id` int(11) unsigned NOT NULL,
@@ -113,15 +126,14 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   KEY `fk_complexity_id` (`fk_complexity_id`),
   CONSTRAINT `fk_complexity_id` FOREIGN KEY (`fk_complexity_id`) REFERENCES `complexities` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_employee_id` FOREIGN KEY (`fk_employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela goals.tasks: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` (`id`, `fk_employee_id`, `fk_complexity_id`, `task`, `points`, `evaluate`, `pay`) VALUES
-	(12, 3, 4, 'STR-5050', 76, 1, 1);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela goals.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(60) DEFAULT NULL,
