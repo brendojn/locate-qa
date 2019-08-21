@@ -7,7 +7,7 @@ class loginController extends controller {
         $this->loadView('login', $data);
     }
 
-    public function entrar() {
+    public function enter() {
     	$data = array('erro'=>'');
 
     	if(isset($_POST['user']) && !empty($_POST['user'])) {
@@ -21,7 +21,7 @@ class loginController extends controller {
     	$this->loadView('login_entrar', $data);
     }
 
-    public function cadastrar() {
+    public function add() {
     	$data = array();
 
     	if(isset($_POST['user']) && !empty($_POST['user'])) {

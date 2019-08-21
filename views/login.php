@@ -15,17 +15,15 @@
 						<li><a href="<?php echo BASE_URL; ?>">Pagamento de metas</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo BASE_URL; ?>login/entrar">Login</a></li>
-						<li><a href="<?php echo BASE_URL; ?>login/cadastrar">Cadastrar</a></li>
+						<li><a href="<?php echo BASE_URL; ?>login/enter">Login</a></li>
+						<li><a href="<?php echo BASE_URL; ?>login/add">Cadastrar</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<div class="container">
-            <h2>SISTEMA DE PAGAMENTO DE METAS - 123MILHAS/BUSCAFÁCIL</h2>
-            <p>
+            <h4>SISTEMA DE PAGAMENTO DE METAS - 123MILHAS/BUSCAFÁCIL</h4>
             <img src="<?php echo BASE_URL; ?>assets/images/logo-123Milhas.png" id="centro" />
-            </p>
-        </div>
+         </div>
     </body>
 </html>
