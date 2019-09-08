@@ -61,7 +61,7 @@ class tasksController extends controller
             $employee = addslashes($_POST['employee']);
             $complexity = addslashes($_POST['complexity']);
 
-            $dados['erro'] = $t->createTasks($employee, $complexity, $task);
+            $data['erro'] = $t->createTasks($employee, $complexity, $task);
         }
 
         $data['employees'] = $e->getEmployees();
