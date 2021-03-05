@@ -1,6 +1,6 @@
 <?php
 
-class tasksController extends controller
+class dutysController extends controller
 {
 
     public function __construct()
@@ -13,7 +13,7 @@ class tasksController extends controller
     {
         $data = array();
 
-        $t = new Task();
+        $d = new Duty();
         $p = new Payment();
         $e = new Employee();
 
@@ -26,7 +26,7 @@ class tasksController extends controller
             $filters = $_GET['filters'];
         }
 
-        $total_tasks = $t->getTotalTasks($filters);
+        $total_dutys = $d->getTotalDutys($filters);
 
         $p = 1;
         if (isset($_GET['p']) && !empty($_GET['p'])) {
@@ -34,85 +34,72 @@ class tasksController extends controller
         }
 
         $per_page = 6;
-        $total_pages = ceil($total_tasks / $per_page);
+        $total_pages = ceil($total_dutys / $per_page);
 
-        $tasks = $t->getTasks($p, $per_page, $filters);
+        $dutys = $d->getDutys($p, $per_page, $filters);
 
-        $data['total_tasks'] = $total_tasks;
-        $data['tasks'] = $tasks;
+        $data['total_dutys'] = $total_dutys;
+        $data['dutys'] = $dutys;
         $data['employees'] = $e->getEmployees();
         $data['filters'] = $filters;
         $data['total_pages'] = $total_pages;
 
-        $this->loadTemplate('tasks', $data);
+        $this->loadTemplate('dutys', $data);
     }
 
     public function add()
     {
         $data = array();
 
-        $t = new Task();
+        $d = new Duty();
         $e = new Employee();
-        $c = new Complexity();
 
-
-        if (isset($_POST['task']) && !empty($_POST['task'])) {
-            $task = addslashes($_POST['task']);
+        if (isset($_POST['week']) && !empty($_POST['week'])) {
+            $week = addslashes($_POST['week']);
             $employee = addslashes($_POST['employee']);
-            $complexity = addslashes($_POST['complexity']);
 
-            $data['erro'] = $t->createTasks($employee, $complexity, $task);
+            $data['erro'] = $d->createDuty($employee, $week);
         }
 
         $data['employees'] = $e->getEmployees();
 
-        $data['complexities'] = $c->getComplexities();
-
-
-        $this->loadTemplate('add-tasks', $data);
+        $this->loadTemplate('add-dutys', $data);
     }
 
     public function delete()
     {
-        $t = new Task();
+        $d = new Duty();
 
-        if (isset($_GET['task']) && !empty($_GET['task'])) {
-            $t->deleteTask($_GET['task']);
+        if (isset($_GET['week']) && !empty($_GET['week'])) {
+            $d->deleteDuty($_GET['week']);
         }
 
-        header("Location: " . BASE_URL . "tasks");
+        header("Location: " . BASE_URL . "dutys");
     }
 
-    public function edit($task)
+    public function edit($week)
     {
 
         $data = array();
 
-        $t = new Task();
+        $d = new Duty();
         $e = new Employee();
-        $c = new Complexity();
 
         if (isset($_POST['employee']) && !empty($_POST['employee'])) {
-
             $employee = addslashes($_POST['employee']);
-            $complexity = addslashes($_POST['complexity']);
 
-            $t->editTasks($task, $employee, $complexity);
-            header("Location: " . BASE_URL . "tasks");
-
+            $d->editTasks($week, $employee);
+            header("Location: " . BASE_URL . "dutys");
         }
 
-        $data['getTask'] = $t->getTask($task);
+        $data['getDuty'] = $d->getDuty($week);
 
         $data['employees'] = $e->getEmployees();
 
-        $data['complexities'] = $c->getComplexities();
-
-
-        $this->loadTemplate('edit-tasks', $data);
+        $this->loadTemplate('edit-dutys', $data);
     }
 
-    public function evaluate($task)
+    public function evaluate($duty)
     {
         $data = array(
             'user_id' => ''
@@ -123,24 +110,19 @@ class tasksController extends controller
 
         $data['user_id'] = $u->getUserById($_SESSION['logged']);
 
-        if (isset($_POST['time']) && !empty($_POST['time'])) {
+        if (isset($_POST['member']) && !empty($_POST['member'])) {
             $user = addslashes($data['user_id']);
-            $time = addslashes($_POST['time']);
-            $automation = addslashes($_POST['automation']);
-            $lighthouse = addslashes($_POST['lighthouse']);
-            $trello = addslashes($_POST['trello']);
-            $jira = addslashes($_POST['jira']);
-            $testrail = addslashes($_POST['testrail']);
+            $member = addslashes($_POST['member']);
+            $font = addslashes($_POST['font']);
+            $tag = addslashes($_POST['tag']);
             $bugs = addslashes($_POST['bugs']);
-            $impact = addslashes($_POST['impact']);
 
-            $e->addEvaluateTask($user, $task, $time, $automation, $lighthouse, $trello, $jira, $testrail, $bugs, $impact);
+            $e->addEvaluateDuty($user, $duty, $member, $font, $tag, $bugs);
 
-            header("Location: " . BASE_URL . "tasks");
-
+            header("Location: " . BASE_URL . "dutys");
         }
 
-        $this->loadTemplate('evaluate-tasks', $data);
+        $this->loadTemplate('evaluate-dutys', $data);
 
     }
 

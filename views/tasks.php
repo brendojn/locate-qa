@@ -58,7 +58,7 @@ if (empty($_SESSION['logged'])) {
                 <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Tester</th>
+                    <th>QA</th>
                     <th>Complexidade</th>
                     <th>Pontos</th>
                     <th>Ações</th>

@@ -18,7 +18,9 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_SESSION['logged']) && !empty($_SESSION['logged'])): ?>
+                        <li><a href="<?php echo BASE_URL; ?>dutys">Plantão QA</a></li>
                         <li><a href="<?php echo BASE_URL; ?>tasks">Tarefas</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>employees">QA's</a></li>
                         <li><a href="<?php echo BASE_URL; ?>login/sair">Sair</a></li>
                     <?php else: ?>
                         <li><a href="<?php echo BASE_URL; ?>cadastro">Cadastre-se</a></li>

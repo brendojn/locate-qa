@@ -11,7 +11,6 @@ class Task extends model
 
         if ($sql->rowCount() == 0) {
             $sql = "INSERT INTO tasks SET fk_employee_id = '$employee', fk_complexity_id = '$complexity', task = '$task', points = '$points'";
-
             $sql = $this->db->query($sql);
 
 
@@ -19,6 +18,9 @@ class Task extends model
         } else {
             return "Tarefa já se encontra cadastrada";
         }
+    }
+
+    public function createDuty($employee, $complexity, $task, $points = 100) {
 
 
     }
