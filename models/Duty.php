@@ -148,7 +148,25 @@ class Duty extends model
         }
 
         return $array;
+    }
+
+    public function getDutyById($id)
+    {
+        $array = array();
+
+        $sql = "SELECT d.week, e.name, d.points, d.evaluate, d.pay FROM dutys d 
+                JOIN employees e 
+                ON (e.id = d.fk_employee_id)
+                WHERE d.id = '$id'";
+
+        $sql = $this->db->query($sql);
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+        }
+
+        return $array;
 
     }
+
 
 }

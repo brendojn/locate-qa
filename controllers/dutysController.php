@@ -110,11 +110,11 @@ class dutysController extends controller
 
         $data['user_id'] = $u->getUserById($_SESSION['logged']);
 
-        if (isset($_POST['member']) && !empty($_POST['member'])) {
+        if (isset($_POST['bugs']) && !empty($_POST['bugs'])) {
             $user = addslashes($data['user_id']);
             $member = addslashes($_POST['member']);
-            $font = addslashes($_POST['font']);
             $tag = addslashes($_POST['tag']);
+            $font = addslashes($_POST['font']);
             $bugs = addslashes($_POST['bugs']);
 
             $e->addEvaluateDuty($user, $duty, $member, $font, $tag, $bugs);
@@ -125,54 +125,4 @@ class dutysController extends controller
         $this->loadTemplate('evaluate-dutys', $data);
 
     }
-
-    public function pay($task)
-    {
-        $data = array(
-            'user_id' => ''
-        );
-
-
-        $t = new Task();
-        $u = new User();
-        $p = new Payment();
-
-        $data['user_id'] = $u->getUserById($_SESSION['logged']);
-
-        if (isset($_POST['value']) && !empty($_POST['value'])) {
-            $user = addslashes($data['user_id']);
-            $value = addslashes($_POST['value']);
-
-
-            $percent = $t->getTaskById($task);
-            $p->payTask($task, $user, $value, $percent['points']);
-
-            header("Location: " . BASE_URL . "tasks");
-        }
-
-        $data['task'] = $t->getTaskById($task);
-
-        $this->loadTemplate('pay-tasks', $data);
-
-    }
-
-    public function info($task)
-    {
-
-        $t = new Task();
-        $e = new Evaluate();
-        $p = new Payment();
-
-        $data['payments'] = $p->getPayment($task);
-
-        $data['evaluates'] = $e->getEvaluate($task);
-
-        $data['final_value'] = $p->getPay($task);
-
-        $data['task'] = $t->getTaskById($task);
-
-        $this->loadTemplate('info-tasks', $data);
-    }
-
-
 }

@@ -43,8 +43,8 @@ class Evaluate extends model
 
     public function addEvaluateDuty($user, $duty, $member, $font, $tag, $bugs)
     {
-
         $sql = "SELECT * from configuration ORDER BY id DESC LIMIT 1";
+
         $sql = $this->db->query($sql);
 
         $row = $sql->fetch();
@@ -63,7 +63,6 @@ class Evaluate extends model
             $total = 600;
         }
 
-
         $sql = "SELECT * FROM dutys WHERE id = '$duty' AND evaluate = '0'";
         $sql = $this->db->query($sql);
 
@@ -72,6 +71,7 @@ class Evaluate extends model
             $sql = $this->db->query($sql);
 
             $sql = "UPDATE dutys SET points = points - '$total', evaluate = '1' WHERE id = '$duty'";
+
             $sql = $this->db->query($sql);
 
             header("Location: " . BASE_URL . "dutys");

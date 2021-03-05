@@ -79,12 +79,6 @@ if (empty($_SESSION['logged'])) {
                     <?php if ($duty['evaluate'] == 0) : ?>
                         <a href="<?php echo BASE_URL; ?>dutys/evaluate/<?php echo $duty['id']; ?>"
                            class="btn btn-info">Avaliar</a>
-                    <?php elseif ($duty['pay'] == 0): ?>
-                        <a href="<?php echo BASE_URL; ?>dutys/pay/<?php echo $duty['id']; ?>"
-                           class="btn btn-info">Pagar</a>
-                    <?php else : ?>
-                        <a href="<?php echo BASE_URL; ?>dutys/info/<?php echo $duty['id']; ?>"
-                           class="btn btn-info">Informações</a>
                     <?php endif; ?>
                 </td>
             </tr>

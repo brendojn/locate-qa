@@ -11,12 +11,11 @@ if (empty($_SESSION['logged'])) {
 
     <form method="POST" enctype="multipart/form-data">
 
-
         <div class="form-group">
             <div class="radio">
                 <label for="automation">Marcou indevidamente um membro?</label><br/>
-                <label><input type="radio" name="member" value="0" />Sim</label>
-                <label><input type="radio" name="member" value="1"/>Não</label>
+                <label><input type="radio" name="member" id="membery" value="1" />Sim</label>
+                <label><input type="radio" name="member" id="membern" value="0"/>Não</label>
             </div>
         </div>
 
