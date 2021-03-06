@@ -12,7 +12,7 @@ if (empty($_SESSION['logged'])) {
     <form method="POST" enctype="multipart/form-data">
 
         <div class="form-group">
-            <label for="task">Nome da Tarefa:</label>
+            <label for="task">Nome do QA:</label>
             <input type="text" name="employee" id="employee" class="form-control"/>
         </div>
 
