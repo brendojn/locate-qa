@@ -11,9 +11,9 @@ if (ENVIRONMENT == 'development') {
     $config['dbuser'] = 'root';
     $config['dbpass'] = '123456';
 } else {
-    define("BASE_URL", "http://127.0.0.1/goals/");
+    define("BASE_URL", "http://goals.plataforma13.com.br/");
     $config['dbname'] = 'goals';
-    $config['host'] = '127.0.0.1';
+    $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = '123456';
 }
