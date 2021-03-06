@@ -110,7 +110,7 @@ class dutysController extends controller
 
         $data['user_id'] = $u->getUserById($_SESSION['logged']);
 
-        if (isset($_POST['bugs']) && !empty($_POST['bugs'])) {
+        if (isset($_POST['bugs'])) {
             $user = addslashes($data['user_id']);
             $member = addslashes($_POST['member']);
             $tag = addslashes($_POST['tag']);

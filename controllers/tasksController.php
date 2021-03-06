@@ -123,7 +123,7 @@ class tasksController extends controller
 
         $data['user_id'] = $u->getUserById($_SESSION['logged']);
 
-        if (isset($_POST['time']) && !empty($_POST['time'])) {
+        if (isset($_POST['time'])) {
             $user = addslashes($data['user_id']);
             $time = addslashes($_POST['time']);
             $automation = addslashes($_POST['automation']);
