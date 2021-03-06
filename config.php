@@ -15,7 +15,7 @@ if (ENVIRONMENT == 'development') {
     $config['dbname'] = 'goals';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
-    $config['dbpass'] = '123456';
+    $config['dbpass'] = 'vfTH&WY6tj69CW';
 }
 
 global $db;
