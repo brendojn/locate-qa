@@ -55,7 +55,7 @@ if (empty($_SESSION['logged'])) {
         <tr>
             <th>Semana</th>
             <th>QA</th>
-            <th>Pontos</th>
+            <th>Reais</th>
             <th>Ações</th>
         </tr>
         </thead>
