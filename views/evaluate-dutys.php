@@ -13,14 +13,6 @@ if (empty($_SESSION['logged'])) {
 
         <div class="form-group">
             <div class="radio">
-                <label for="automation">Marcou indevidamente um membro?</label><br/>
-                <label><input type="radio" name="member" id="membery" value="1" />Sim</label>
-                <label><input type="radio" name="member" id="membern" value="0"/>Não</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="radio">
                 <label for="automation">Tagueou todos os bugs?</label><br/>
                 <label><input type="radio" name="tag" value="0" />Sim</label>
                 <label><input type="radio" name="tag" value="1"/>Não</label>

@@ -41,7 +41,7 @@ class Evaluate extends model
         }
     }
 
-    public function addEvaluateDuty($user, $duty, $member, $font, $tag, $bugs)
+    public function addEvaluateDuty($user, $duty, $font, $tag, $bugs)
     {
         $sql = "SELECT * from configuration ORDER BY id DESC LIMIT 1";
 
@@ -49,15 +49,13 @@ class Evaluate extends model
 
         $row = $sql->fetch();
 
-        $config_member = $member * $row['config_member'];
-
         $config_font = $font * $row['config_font'];
 
         $config_tag = $tag * $row['config_tag'];
 
         $config_bugs = $bugs * $row['config_high_impact'];
 
-        $total = $config_bugs + $config_tag + $config_font + $config_member;
+        $total = $config_bugs + $config_tag + $config_font;
 
         if ($total > 600) {
             $total = 600;
@@ -67,7 +65,7 @@ class Evaluate extends model
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() == 1) {
-            $sql = "INSERT INTO evaluates SET fk_user_id = '$user', fk_duty_id = '$duty', impact = '$bugs', tag = '$tag', member = '$member', font = '$font'";
+            $sql = "INSERT INTO evaluates SET fk_user_id = '$user', fk_duty_id = '$duty', impact = '$bugs', tag = '$tag', font = '$font'";
             $sql = $this->db->query($sql);
 
             $sql = "UPDATE dutys SET points = points - '$total', evaluate = '1' WHERE id = '$duty'";

@@ -112,12 +112,11 @@ class dutysController extends controller
 
         if (isset($_POST['bugs'])) {
             $user = addslashes($data['user_id']);
-            $member = addslashes($_POST['member']);
             $tag = addslashes($_POST['tag']);
             $font = addslashes($_POST['font']);
             $bugs = addslashes($_POST['bugs']);
 
-            $e->addEvaluateDuty($user, $duty, $member, $font, $tag, $bugs);
+            $e->addEvaluateDuty($user, $duty, $font, $tag, $bugs);
 
             header("Location: " . BASE_URL . "dutys");
         }
