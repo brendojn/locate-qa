@@ -167,7 +167,6 @@ class Duty extends model
                 JOIN employees e 
                 ON (e.id = d.fk_employee_id)
                 WHERE d.id = '$id'";
-
         $sql = $this->db->query($sql);
         if ($sql->rowCount() > 0) {
             $array = $sql->fetch();
