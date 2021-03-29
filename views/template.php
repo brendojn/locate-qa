@@ -23,7 +23,7 @@
                         <li><a href="<?php echo BASE_URL; ?>employees">QA's</a></li>
                         <li><a href="<?php echo BASE_URL; ?>login/sair">Sair</a></li>
                     <?php else: ?>
-                        <li><a href="<?php echo BASE_URL; ?>cadastro">Cadastre-se</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>add">Cadastre-se</a></li>
                         <li><a href="<?php echo BASE_URL; ?>login">Login</a></li>
                     <?php endif; ?>
                 </ul>

@@ -14,8 +14,8 @@
 						<li><a href="<?php echo BASE_URL; ?>">Pagamento de metas</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo BASE_URL; ?>login/entrar">Login</a></li>
-						<li><a href="<?php echo BASE_URL; ?>login/cadastrar">Cadastrar</a></li>
+						<li><a href="<?php echo BASE_URL; ?>login/enter">Login</a></li>
+						<li><a href="<?php echo BASE_URL; ?>login/add">Cadastrar</a></li>
 					</ul>
 				</div>
 			</div>
