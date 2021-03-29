@@ -41,7 +41,7 @@ class Evaluate extends model
         }
     }
 
-    public function addEvaluateDuty($user, $duty, $font, $tag, $bugs)
+    public function addEvaluateDuty($user, $duty, $font, $tag, $bugs, $justification)
     {
         $sql = "SELECT * from configuration ORDER BY id DESC LIMIT 1";
 
@@ -65,7 +65,7 @@ class Evaluate extends model
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() == 1) {
-            $sql = "INSERT INTO evaluates SET fk_user_id = '$user', fk_duty_id = '$duty', impact = '$bugs', tag = '$tag', font = '$font'";
+            $sql = "INSERT INTO evaluates SET fk_user_id = '$user', fk_duty_id = '$duty', impact = '$bugs', tag = '$tag', font = '$font', justification = '$justification'";
             $sql = $this->db->query($sql);
 
             $sql = "UPDATE dutys SET points = points - '$total', evaluate = '1' WHERE id = '$duty'";
@@ -78,7 +78,7 @@ class Evaluate extends model
         }
     }
 
-    public function getEvaluate($task)
+    public function getEvaluateTask($task)
     {
         $array = array();
 
@@ -88,6 +88,22 @@ class Evaluate extends model
                 JOIN users u ON (u.id = e.fk_user_id)
                 WHERE t.id = '$task'";
 
+        $sql = $this->db->query($sql);
+
+        $array = $sql->fetch();
+
+        return $array;
+    }
+
+    public function getEvaluateDuty($duty)
+    {
+        $array = array();
+
+        $sql = "SELECT u.user, e.justification
+                FROM evaluates e
+                JOIN dutys d ON (d.id = e.fk_duty_id)
+                JOIN users u ON (u.id = e.fk_user_id)
+                WHERE d.id = '$duty'";
         $sql = $this->db->query($sql);
 
         $array = $sql->fetch();

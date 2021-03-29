@@ -114,13 +114,25 @@ class dutysController extends controller
             $tag = addslashes($_POST['tag']);
             $font = addslashes($_POST['font']);
             $bugs = addslashes($_POST['bugs']);
+            $justification = addslashes($_POST['justification']);
 
-            $e->addEvaluateDuty($user, $duty, $font, $tag, $bugs);
+            $e->addEvaluateDuty($user, $duty, $font, $tag, $bugs, $justification);
 
             header("Location: " . BASE_URL . "dutys");
         }
 
         $this->loadTemplate('evaluate-dutys', $data);
+    }
 
+    public function info($id)
+    {
+        $d = new Duty();
+        $e = new Evaluate();
+
+        $data['evaluates'] = $e->getEvaluateDuty($id);
+
+        $data['duty'] = $d->getDutyById($id);
+
+        $this->loadTemplate('info-dutys', $data);
     }
 }

@@ -183,7 +183,7 @@ class tasksController extends controller
 
         $data['payments'] = $p->getPayment($task);
 
-        $data['evaluates'] = $e->getEvaluate($task);
+        $data['evaluates'] = $e->getEvaluateTask($task);
 
         $data['final_value'] = $p->getPay($task);
 
@@ -191,6 +191,4 @@ class tasksController extends controller
 
         $this->loadTemplate('info-tasks', $data);
     }
-
-
 }

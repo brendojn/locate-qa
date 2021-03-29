@@ -80,6 +80,11 @@ if (empty($_SESSION['logged'])) {
                         <a href="<?php echo BASE_URL; ?>dutys/evaluate/<?php echo $duty['id']; ?>"
                            class="btn btn-info">Avaliar</a>
                     <?php endif; ?>
+                    <?php if ($duty['evaluate'] == 1) : ?>
+                        <a href="<?php echo BASE_URL; ?>dutys/info/<?php echo $duty['id']; ?>"
+                           class="btn btn-info">Informações</a>
+                    <?php endif; ?>
+
                 </td>
             </tr>
         <?php endforeach; ?>

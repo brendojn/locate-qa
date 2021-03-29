@@ -33,6 +33,11 @@ if (empty($_SESSION['logged'])) {
         </div>
         <br/>
 
+        <div class="form-group">
+            <label for="text">Justificativa</label>
+-        </div>
+        <br/>
+
         <input type="submit" value="Emitir Avaliação" class="btn btn-default"/>
     </form>
 
