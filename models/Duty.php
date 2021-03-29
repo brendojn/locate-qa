@@ -5,11 +5,23 @@ class Duty extends model
 
     public function createDuty($employee, $week, $points = 600)
     {
-        $sql = "SELECT * FROM dutys WHERE week = '$week'";
+        $week = explode('-', $week);
+
+        $d = new DateTime();
+        $d->setISODate($week[0], preg_replace('/[^0-9]/', '', $week[1]));
+
+        $date = $d->format('d/m/Y');
+
+        $dateFinal = DateTime::createFromFormat('d/m/Y', $date);
+        $dateFinal->add(new DateInterval('P4D')); 
+        $dateFinal = $dateFinal->add(new DateInterval('P2D'));
+        $dateFinal = $dateFinal->format('d/m/Y');
+
+        $sql = "SELECT * FROM dutys WHERE week = '$date - $dateFinal'";
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() == 0) {
-            $sql = "INSERT INTO dutys SET fk_employee_id = '$employee', week = '$week', points = '$points'";
+            $sql = "INSERT INTO dutys SET fk_employee_id = '$employee', week = '$date - $dateFinal', points = '$points'";
             $sql = $this->db->query($sql);
 
 
