@@ -36,7 +36,8 @@ if (empty($_SESSION['logged'])) {
         <div class="form-group">
             <label for="text">Justificativa</label>
             <input type="text" name="justification" id="justification" class="form-control" rows="3"/>
--        </div>
+        </div>
+
         <br/>
 
         <input type="submit" value="Emitir Avaliação" class="btn btn-default"/>

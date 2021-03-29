@@ -31,12 +31,15 @@ if (empty($_SESSION['logged'])) {
                    disabled/>
         </div>
 
+        <?php if ($evaluates['justification'] !== '') : ?>
         <div class="form-group">
             <label for="value">Justificativa:</label>
-            <input type="text" name="justification" id="justification" class="form-control" rows="3"
+            <input type="text" name="justification" id="justification" class="form-control"
                    value="<?php echo $evaluates['justification'] ?>"
                    disabled/>
         </div>
+        <?php endif; ?>
+
         <br/>
 
     </form>
