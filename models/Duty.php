@@ -13,8 +13,7 @@ class Duty extends model
         $date = $d->format('d/m/Y');
 
         $dateFinal = DateTime::createFromFormat('d/m/Y', $date);
-        $dateFinal->add(new DateInterval('P4D')); 
-        $dateFinal = $dateFinal->add(new DateInterval('P2D'));
+        $dateFinal->add(new DateInterval('P4D'));
         $dateFinal = $dateFinal->format('d/m/Y');
 
         $sql = "SELECT * FROM dutys WHERE week = '$date - $dateFinal'";
@@ -125,9 +124,8 @@ class Duty extends model
         $sql = $this->db->query($sql);
     }
 
-    public function editTasks($week, $employee)
+    public function editTasks($id, $employee)
     {
-
         $array = array();
 
         $sql = "SELECT id FROM employees WHERE id = '$employee'";
@@ -139,21 +137,20 @@ class Duty extends model
 
         $employee_id = $array['id'];
 
-        $sql = "UPDATE dutys SET fk_employee_id = '$employee_id' WHERE week = '$week'";
-
+        $sql = "UPDATE dutys SET fk_employee_id = '$employee_id' WHERE id = '$id'";
         $sql = $this->db->query($sql);
 
         header("Location: " . BASE_URL . "dutys");
     }
 
-    public function getDuty($week)
+    public function getDuty($id)
     {
         $array = array();
 
         $sql = "SELECT d.week, e.id, e.name, d.points FROM dutys d 
                 JOIN employees e 
                 ON (e.id = d.fk_employee_id)
-                WHERE week = '$week'";
+                WHERE d.id = '$id'";
         $sql = $this->db->query($sql);
         if ($sql->rowCount() > 0) {
             $array = $sql->fetch();

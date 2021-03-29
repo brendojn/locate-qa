@@ -68,7 +68,7 @@ if (empty($_SESSION['logged'])) {
                 <td><?php echo "R$ " . $duty['points']; ?></td>
                 <td>
                     <?php if ($duty['pay'] == 0 && $duty['evaluate'] == 0) : ?>
-                        <a href="<?php echo BASE_URL; ?>dutys/edit/<?php echo $duty['week']; ?>"
+                        <a href="<?php echo BASE_URL; ?>dutys/edit/<?php echo $duty['id']; ?>"
                            class="btn btn-default">Editar</a>
                         <a href="dutys/delete?week=<?php echo $duty['week']; ?>"
                            class="btn btn-danger">Excluir</a>

@@ -77,9 +77,8 @@ class dutysController extends controller
         header("Location: " . BASE_URL . "dutys");
     }
 
-    public function edit($week)
+    public function edit($id)
     {
-
         $data = array();
 
         $d = new Duty();
@@ -88,11 +87,11 @@ class dutysController extends controller
         if (isset($_POST['employee']) && !empty($_POST['employee'])) {
             $employee = addslashes($_POST['employee']);
 
-            $d->editTasks($week, $employee);
+            $d->editTasks($id, $employee);
             header("Location: " . BASE_URL . "dutys");
         }
 
-        $data['getDuty'] = $d->getDuty($week);
+        $data['getDuty'] = $d->getDuty($id);
 
         $data['employees'] = $e->getEmployees();
 
