@@ -5,14 +5,14 @@ require 'environment.php';
 $config = array();
 
 if (ENVIRONMENT == 'development') {
-    define("BASE_URL", "http://127.0.0.1/goals/");
-    $config['dbname'] = 'goals';
+    define("BASE_URL", "http://127.0.0.1/location/");
+    $config['dbname'] = 'location_qa';
     $config['host'] = '127.0.0.1';
     $config['dbuser'] = 'root';
     $config['dbpass'] = '123456';
 } else {
-    define("BASE_URL", "http://goals.plataforma13.com.br/");
-    $config['dbname'] = 'goals';
+    define("BASE_URL", "http://location.plataforma13.com.br/");
+    $config['dbname'] = 'location_qa';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = 'vfTH&WY6tj69CW';

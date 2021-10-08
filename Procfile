@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 goals/
+web: vendor/bin/heroku-php-apache2 location/
