@@ -26,24 +26,13 @@ class locatesController extends controller
 
         $total_locates = $l->getTotalLocates($filters);
 
-        $p = 1;
-        if (isset($_GET['p']) && !empty($_GET['p'])) {
-            $p = addslashes($_GET['p']);
-        }
-
-        $per_page = 6;
-        $total_pages = ceil($total_locates / $per_page);
-
-        $locates = $l->getLocates($p, $per_page);
-        $locateFilters = $l->getLocatesFilters($filters);
-//        print_r($locateFilters); die();
+        $locates = $l->getLocates($filters);
 
         $data['total_locates'] = $total_locates;
-        $data['getFilters'] = $locateFilters;
         $data['locates'] = $locates;
         $data['users'] = $u->getUsers();
         $data['filters'] = $filters;
-        $data['total_pages'] = $total_pages;
+        $data['userLogged'] = $u->getUser($_SESSION['logged']);
 
         $this->loadTemplate('locates', $data);
     }

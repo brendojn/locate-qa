@@ -23,8 +23,10 @@ if (empty($_SESSION['logged'])) {
                 <?php
                 foreach ($users as $user):
                     ?>
+                <?php if ($user['user'] != 'admin') : ?>
                     <option value="<?php echo $user['id']; ?>"
                         <?php echo $getLocate['id'] == $user['id'] ? 'selected' : ''; ?> ><?php echo utf8_encode($user['user']); ?></option>
+                <?php endif; ?>
                 <?php
                 endforeach;
                 ?>

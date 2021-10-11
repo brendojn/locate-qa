@@ -51,7 +51,7 @@ class Locate extends model
         return $row['c'];
     }
 
-    public function getLocatesFilters($filters)
+    public function getLocates($filters)
     {
         $array = array();
 
@@ -60,30 +60,6 @@ class Locate extends model
         if (!empty($filters['name_object'])) {
             $filtrostring[] = 'locate.id = :name_object';
         }
-
-        $sql = $this->db->prepare("SELECT locate.id, users.user, locate.name, locate.device, locate.environment, locate.prevision_date FROM locate 
-                JOIN users
-                ON users.id = locate.fk_user_id
-                WHERE " . implode(' AND ', $filtrostring)." ORDER BY locate.id DESC");
-//        print_r($sql); die();
-        if (!empty($filters['name_object'])) {
-            $sql->bindValue(':name_object', $filters['name_object']);
-        }
-
-        $sql->execute();
-
-        if ($sql->rowCount() > 0) {
-            $array = $sql->fetchAll();
-        }
-
-        return $array;
-    }
-
-    public function getLocates($page, $per_page)
-    {
-        $offset = ($page - 1) * $per_page;
-
-        $array = array();
 
         $date_now = date("Y-m-d");
 
@@ -103,7 +79,11 @@ class Locate extends model
         $sql = $this->db->prepare("SELECT locate.id, users.user, locate.name, locate.device, locate.environment, locate.prevision_date FROM locate 
                 JOIN users
                 ON users.id = locate.fk_user_id
-                ORDER BY locate.id DESC LIMIT $offset, $per_page");
+                WHERE " . implode(' AND ', $filtrostring) .
+                " ORDER BY locate.id DESC");
+        if (!empty($filters['name_object'])) {
+            $sql->bindValue(':name_object', $filters['name_object']);
+        }
 
         $sql->execute();
 

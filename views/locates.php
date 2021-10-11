@@ -17,9 +17,11 @@ if (empty($_SESSION['logged'])) {
                     <div class="col-xs-3 col-xs-offset-0">
                         <label for="name_object">Objeto de locação:</label>
                         <select id="name_object" name="filters[name_object]" class="form-control">
+                            <?php if (!isset($_GET['filters'])) : ?>
                             <option></option>
-                            <?php foreach ($getFilters as $filter): ?>
-                                <option value="<?php echo $filter['id']; ?>" <?php echo ($filter['id'] == $filters['name_object']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($filter['name']); ?></option>
+                            <?php endif; ?>
+                            <?php foreach ($locates as $locate): ?>
+                                <option value="<?php echo $locate['id']; ?>" <?php echo ($locate['id'] == $filters['name_object']) ? 'selected="selected"' : ''; ?>><?php echo utf8_encode($locate['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -28,8 +30,13 @@ if (empty($_SESSION['logged'])) {
                     <br/>
                     <br/>
                     <div class="form-group">
+                        <?php if ($userLogged == 'admin') : ?>
                         <a href="<?php echo BASE_URL; ?>locates/add" class="btn btn-default">Adicionar Locação</a>
+                        <?php endif; ?>
                         <input type="submit" class="btn btn-info" value="Aplicar filtro(s)"/>
+                        <?php if (isset($_GET['filters'])) : ?>
+                        <a href="<?php echo BASE_URL; ?>locates" class="btn btn-outline-info">Limpar filtro(s)</a>
+                        <?php endif; ?>
                     </div>
                 </form>
             </div>
@@ -57,18 +64,14 @@ if (empty($_SESSION['logged'])) {
                 <td><?php echo $locate['user']; ?></td>
                 <td><?php echo implode("/",array_reverse(explode("-",$locate['prevision_date']))); ?></td>
 
+
                 <td>
+                    <?php if ($locate['user'] == 'admin') : ?>
                     <a href="<?php echo BASE_URL; ?>locates/edit/<?php echo $locate['id']; ?>"
                        class="btn btn-default">Editar</a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
-
-    <ul class="pagination">
-        <?php for ($q = 1; $q <= $total_pages; $q++): ?>
-            <li class="<?php echo ($p == $q) ? 'active' : ''; ?>">
-                <a href="<?php echo BASE_URL; ?>locates?p=<?php echo $q; ?>"><?php echo $q; ?></a></li>
-        <?php endfor; ?>
-    </ul>
 </div>
