@@ -5,7 +5,6 @@ class Locate extends model
 
     public function createLocate($name_loc, $prevision_date, $user, $class)
     {
-
         $name_loc = trim($name_loc);
         $sql = "SELECT * FROM locate WHERE name = '$name_loc'";
 
@@ -76,11 +75,13 @@ class Locate extends model
             }
         }
 
-        $sql = $this->db->prepare("SELECT locate.id, users.user, locate.name, locate.device, locate.environment, locate.prevision_date FROM locate 
+        $sql = $this->db->prepare("SELECT locate.id, users.user, locate.name, locate.device, locate.environment, locate.prevision_date, l.fk_locate_id FROM locate 
                 JOIN users
                 ON users.id = locate.fk_user_id
+                LEFT JOIN logs l 
+                ON locate.id = l.fk_locate_id
                 WHERE " . implode(' AND ', $filtrostring) .
-                " ORDER BY locate.id DESC");
+                    " GROUP BY locate.id ORDER BY locate.name ASC");
         if (!empty($filters['name_object'])) {
             $sql->bindValue(':name_object', $filters['name_object']);
         }
@@ -98,7 +99,7 @@ class Locate extends model
     {
         $array = array();
 
-        $sql = "SELECT id FROM users WHERE id = '$user'";
+        $sql = "SELECT id, user FROM users WHERE id = '$user'";
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() > 0) {
@@ -106,6 +107,18 @@ class Locate extends model
         }
 
         $user_id = $array['id'];
+        $user_name = $array['user'];
+
+
+        $sql = "SELECT id, name FROM locate WHERE id = '$id'";
+        $sql = $this->db->query($sql);
+
+        if ($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+        }
+
+        $locate_name = $array['name'];
+
         if ($prevision_date !== null) {
             $prevision_date = implode("-", array_reverse(explode("/", $prevision_date)));
             $prevision_date = "'" . $prevision_date . "'";
@@ -114,6 +127,10 @@ class Locate extends model
         }
 
         $sql = "UPDATE locate SET fk_user_id = '$user_id', prevision_date = $prevision_date WHERE id = '$id'";
+        $sql = $this->db->query($sql);
+
+        $today = date("Y-m-d H:i:s");
+        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
         $sql = $this->db->query($sql);
 
         header("Location: " . BASE_URL . "locates");

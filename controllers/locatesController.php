@@ -15,6 +15,7 @@ class locatesController extends controller
 
         $l = new Locate();
         $u = new User();
+        $lg = new Logs();
 
         $filters = array(
             'name_object' => '',
@@ -75,6 +76,15 @@ class locatesController extends controller
         $data['getLocate'] = $l->getLocate($id);
 
         $this->loadTemplate('edit-locates', $data);
+    }
+
+    public function info($id)
+    {
+        $l = new Logs();
+
+        $data['logs'] = $l->getLogsByLocateId($id);
+
+        $this->loadTemplate('history-locates', $data);
     }
 
 }
