@@ -9,7 +9,7 @@ if (ENVIRONMENT == 'development') {
     $config['dbname'] = 'location_qa';
     $config['host'] = '127.0.0.1';
     $config['dbuser'] = 'root';
-    $config['dbpass'] = '123456';
+    $config['dbpass'] = '12345678';
 } else {
     define("BASE_URL", "http://location.plataforma13.com.br/");
     $config['dbname'] = 'location_qa';
