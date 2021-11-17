@@ -8,18 +8,20 @@ class Locate extends model
         $name_loc = trim($name_loc);
         $sql = "SELECT * FROM locate WHERE name = '$name_loc'";
 
+        $prevision_date = explode(' ', $prevision_date);
+
         $sql = $this->db->query($sql);
         $class === 'environment' ? $environment = '0' : $device = '0';
         $class === 'device' ? $environment = '0' : $device = '1';
-        if ($prevision_date !== null && $prevision_date !== "" ) {
-            $prevision_date = implode("-", array_reverse(explode("/", $prevision_date)));
-            $prevision_date = "'" . $prevision_date . "'";
+        if (!empty($prevision_date)) {
+            $prevision_date[0] = implode("-", array_reverse(explode("/", $prevision_date[0])));
+
         } else {
-            $prevision_date = "NULL";
+            $prevision_date = null;
         }
 
         if ($sql->rowCount() == 0) {
-            $sql = "INSERT INTO locate SET fk_user_id = '$user', name = '$name_loc', device = '$device', environment = '$environment', prevision_date = $prevision_date";
+            $sql = "INSERT INTO locate SET fk_user_id = '$user', name = '$name_loc', device = '$device', environment = '$environment', prevision_date = '$prevision_date[0] $prevision_date[1]'";
             $sql = $this->db->query($sql);
 
             header("Location: " . BASE_URL . "locates");

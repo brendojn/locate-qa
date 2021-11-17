@@ -73,7 +73,7 @@ if (empty($_SESSION['logged'])) {
         <?php endif; ?>
             <td><?php echo $locate['name']; ?></td>
             <td><?php echo $locate['user']; ?></td>
-            <td><?php echo implode("/", array_reverse(explode("-", $locate['prevision_date']))); ?></td>
+            <td><?php echo $locate['prevision_date']; ?></td>
 
             <td>
                 <?php if ($locate['user'] == 'admin') : ?>
