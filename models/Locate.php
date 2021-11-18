@@ -62,9 +62,11 @@ class Locate extends model
             $filtrostring[] = 'locate.id = :name_object';
         }
 
-        $date_now = date("Y-m-d");
+        $date_now = date("Y-m-d H:i:s");
 
-        $sql = "SELECT id, prevision_date FROM locate";
+        $sql = "SELECT l.id, l.prevision_date, u.user, u.id FROM locate l
+                JOIN users u 
+                ON u.id = l.fk_user_id";
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() > 0) {
@@ -72,8 +74,8 @@ class Locate extends model
         }
 
         foreach ($array as $ar) {
-            if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['fk_user_id'] !== 3) {
-                $this->editLocate($ar['id'], 3, null);
+            if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['user'] !== 'admin') {
+                $this->editLocate($ar['id'], $ar['u.id'], null);
             }
         }
 

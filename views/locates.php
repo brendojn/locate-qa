@@ -78,7 +78,7 @@ if (empty($_SESSION['logged'])) {
             <td><?php echo $prevision_date[0] . " " . $prevision_date[1]; ?></td>
 
             <td>
-                <?php if ($userLogged == 'admin') : ?>
+                <?php if ($userLogged == 'admin' || $locate['user'] == 'admin') : ?>
                     <a href="<?php echo BASE_URL; ?>locates/edit/<?php echo $locate['id']; ?>"
                        class="btn btn-default">Editar</a>
                 <?php endif; ?>
