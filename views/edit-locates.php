@@ -33,33 +33,23 @@ if (empty($_SESSION['logged'])) {
             </select>
         </div>
 
-        <div class="row">
-            <div class="form-group ">
-                <label class="control-label col-sm-2 requiredField" for="prevision_date">
-                    Previsão de término
-                    <span class="asteriskField">
-       </span>
-                </label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar">
-                        </i>
-                    </div>
-                    <input class="form-control" id="prevision_date" name="prevision_date" placeholder="DD/MM/YYYY" type="text" autocomplete="off"/>
-                    <script>
-                        $(document).ready(function(){
-                            var date_input=$('input[name="prevision_date"]'); //our date input has the name "date"
-                            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                            date_input.datepicker({
-                                startDate: new Date(),
-                                format: 'dd/mm/yyyy',
-                                container: container,
-                                todayHighlight: true,
-                                autoclose: true,
-                            })
-                        })
-                    </script>
-                </div>
+        <div class="form-group">
+            <label for="prevision_date">Previsão de término</label>
+            <input class="form-control" name="prevision_date" type="text"  id="week">
+            <script type="text/javascript">
+                $(function() {
+                    $('input[name="prevision_date"]').daterangepicker( {
+                        singleDatePicker: true,
+                        timePicker: true,
+                        timePicker24Hour: true,
+                        timePickerIncrement: 15,
+                        locale: {
+                            format: 'DD/MM/YYYY HH:mm'
+                        }
+                    });
+                });
+            </script>
+        </div>
 
         <br/>
 
