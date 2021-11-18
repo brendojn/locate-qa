@@ -20,6 +20,7 @@ if (empty($_SESSION['logged'])) {
         <div class="form-group">
             <label for="user">QA:</label>
             <select name="user" id="user" class="form-control">
+                <option value="default"></option>
                 <?php
                 foreach ($users as $user):
                     ?>
