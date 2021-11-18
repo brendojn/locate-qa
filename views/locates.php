@@ -73,7 +73,9 @@ if (empty($_SESSION['logged'])) {
         <?php endif; ?>
             <td><?php echo $locate['name']; ?></td>
             <td><?php echo $locate['user']; ?></td>
-            <td><?php echo $locate['prevision_date']; ?></td>
+            <?php $prevision_date = explode(' ', $locate['prevision_date']); ?>
+            <?php $prevision_date[0] = implode("/", array_reverse(explode("-", $prevision_date[0]))); ?>
+            <td><?php echo $prevision_date[0] . " " . $prevision_date[1]; ?></td>
 
             <td>
                 <?php if ($locate['user'] == 'admin') : ?>
@@ -81,8 +83,8 @@ if (empty($_SESSION['logged'])) {
                        class="btn btn-default">Editar</a>
                 <?php endif; ?>
                 <?php if (isset($locate['fk_locate_id'])) : ?>
-                <a href="<?php echo BASE_URL; ?>locates/info/<?php echo $locate['id']; ?>"
-                   class="btn btn-info">Informações</a>
+                    <a href="<?php echo BASE_URL; ?>locates/info/<?php echo $locate['id']; ?>"
+                       class="btn btn-info">Informações</a>
                 <?php endif; ?>
             </td>
             </tr>
