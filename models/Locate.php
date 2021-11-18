@@ -130,7 +130,15 @@ class Locate extends model
             $prevision_date = null;
         }
 
+        $u = new User();
+        $isAdmin = $u->getUserByName('admin');
+
+        if (empty($user_id)) {
+            $user_id = $isAdmin;
+        }
+
         $sql = "UPDATE locate SET fk_user_id = '$user_id', prevision_date = '$prevision_date[0] $prevision_date[1]' WHERE id = '$id'";
+//        print_r($sql); die();
         $sql = $this->db->query($sql);
 
         $today = date("Y-m-d H:i:s");

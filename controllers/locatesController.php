@@ -63,7 +63,8 @@ class locatesController extends controller
         $l = new Locate();
         $u = new User();
 
-        if (isset($_POST['user']) && !empty($_POST['user'])) {
+        if (isset($_POST['prevision_date']) && !empty($_POST['prevision_date'])) {
+            $user = addslashes($_POST['user']);
             $prevision_date = addslashes($_POST['prevision_date']);
 
             $l->editLocate($id, $user, $prevision_date);
