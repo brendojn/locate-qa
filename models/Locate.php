@@ -104,6 +104,8 @@ class Locate extends model
         $sql = "SELECT id, user FROM users WHERE id = '$user'";
         $sql = $this->db->query($sql);
 
+        $prevision_date = explode(' ', $prevision_date);
+
         if ($sql->rowCount() > 0) {
             $array = $sql->fetch();
         }
@@ -121,14 +123,14 @@ class Locate extends model
 
         $locate_name = $array['name'];
 
-        if ($prevision_date !== null) {
-            $prevision_date = implode("-", array_reverse(explode("/", $prevision_date)));
-            $prevision_date = "'" . $prevision_date . "'";
+        if (!empty($prevision_date)) {
+            $prevision_date[0] = implode("-", array_reverse(explode("/", $prevision_date[0])));
+
         } else {
-            $prevision_date = "NULL";
+            $prevision_date = null;
         }
 
-        $sql = "UPDATE locate SET fk_user_id = '$user_id', prevision_date = $prevision_date WHERE id = '$id'";
+        $sql = "UPDATE locate SET fk_user_id = '$user_id', prevision_date = $prevision_date[0] $prevision_date[1] WHERE id = '$id'";
         $sql = $this->db->query($sql);
 
         $today = date("Y-m-d H:i:s");
