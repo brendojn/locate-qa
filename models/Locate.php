@@ -74,9 +74,12 @@ class Locate extends model
             $array = $sql->fetchAll();
         }
 
+        $u = new User();
+        $isAdmin = $u->getUserByName('admin');
+
         foreach ($array as $ar) {
             if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['user'] !== 'admin') {
-                $this->editLocate($ar['locate_id'], 2, NULL);
+                $this->editLocate($ar['locate_id'], $isAdmin, NULL);
             }
         }
 
@@ -125,10 +128,6 @@ class Locate extends model
         }
 
         $locate_name = $array['name'];
-
-
-        $u = new User();
-        $isAdmin = $u->getUserByName('admin');
 
         if (empty($user_id)) {
             $user_id = $isAdmin;
