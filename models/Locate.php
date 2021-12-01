@@ -64,9 +64,10 @@ class Locate extends model
 
         $date_now = date("Y-m-d H:i:s");
 
-        $sql = "SELECT l.id, l.prevision_date, u.user, u.id FROM locate l
+        $sql = "SELECT l.id as locate_id, l.prevision_date, u.user, u.id as user_id FROM locate l
                 JOIN users u 
                 ON u.id = l.fk_user_id";
+//        print_r($sql);die();
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() > 0) {
@@ -75,7 +76,7 @@ class Locate extends model
 
         foreach ($array as $ar) {
             if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['user'] !== 'admin') {
-                $this->editLocate($ar['id'], $ar['u.id'], null);
+                $this->editLocate($ar['locate_id'], 2, NULL);
             }
         }
 
@@ -125,12 +126,6 @@ class Locate extends model
 
         $locate_name = $array['name'];
 
-        if (!empty($prevision_date)) {
-            $prevision_date[0] = implode("-", array_reverse(explode("/", $prevision_date[0])));
-
-        } else {
-            $prevision_date = null;
-        }
 
         $u = new User();
         $isAdmin = $u->getUserByName('admin');
@@ -139,9 +134,22 @@ class Locate extends model
             $user_id = $isAdmin;
         }
 
+        if ($prevision_date[0] !== '') {
+            $prevision_date[0] = implode("-", array_reverse(explode("/", $prevision_date[0])));
+        } else {
+            $sql = "UPDATE locate SET fk_user_id = $user_id, prevision_date = NULL WHERE id = '$id'";
+            $sql = $this->db->query($sql);
+
+            $today = date("Y-m-d H:i:s");
+            $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
+            $sql = $this->db->query($sql);
+
+            header("Location: " . BASE_URL . "locates");
+        }
+
         $sql = "UPDATE locate SET fk_user_id = '$user_id', prevision_date = '$prevision_date[0] $prevision_date[1]' WHERE id = '$id'";
-//        print_r($sql); die();
         $sql = $this->db->query($sql);
+
 
         $today = date("Y-m-d H:i:s");
         $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
