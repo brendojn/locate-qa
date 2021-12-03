@@ -11,7 +11,7 @@ class Locate extends model
         $prevision_date = explode(' ', $prevision_date);
 
         $sql = $this->db->query($sql);
-        $class === 'environment' ? $environment = '0' : $device = '0';
+        $class === 'environment' ? $environment = '1' : $device = '0';
         $class === 'device' ? $environment = '0' : $device = '1';
         if (!empty($prevision_date)) {
             $prevision_date[0] = implode("-", array_reverse(explode("/", $prevision_date[0])));
