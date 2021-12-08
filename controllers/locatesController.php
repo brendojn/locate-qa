@@ -87,4 +87,15 @@ class locatesController extends controller
         $this->loadTemplate('history-locates', $data);
     }
 
+    public function deallocate()
+    {
+        $l = new Locate();
+
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $l->deallocate($_GET['id']);
+        }
+
+        header("Location: " . BASE_URL . "locates");
+    }
+
 }

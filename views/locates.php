@@ -86,6 +86,10 @@ if (empty($_SESSION['logged'])) {
                     <a href="<?php echo BASE_URL; ?>locates/info/<?php echo $locate['id']; ?>"
                        class="btn btn-info">Informações</a>
                 <?php endif; ?>
+                <?php if ($locate['prevision_date'] != NULL && $locate['user'] === $userLogged) : ?>
+                    <a href="locates/deallocate?id=<?php echo $locate['id']; ?>"
+                       class="btn btn-warning">Liberar Locação</a>
+                <?php endif; ?>
             </td>
             </tr>
         <?php endforeach; ?>
