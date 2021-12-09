@@ -140,7 +140,7 @@ class Locate extends model
             $sql = $this->db->query($sql);
 
             $today = date("Y-m-d H:i:s");
-            $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today', type = 1";
+            $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
             $sql = $this->db->query($sql);
 
             header("Location: " . BASE_URL . "locates");
@@ -151,7 +151,7 @@ class Locate extends model
 
 
         $today = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today', type = 1";
+        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
         $sql = $this->db->query($sql);
 
         header("Location: " . BASE_URL . "locates");
@@ -185,7 +185,7 @@ class Locate extends model
         $locate_name = $array['name'];
 
         $today = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] desalocado pelo usuário $user_name', created_at = '$today', type = 0";
+        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] desalocado pelo usuário $user_name', created_at = '$today'";
         $sql = $this->db->query($sql);
 
         $sql = "UPDATE locate l SET l.fk_user_id = '$isAdmin', l.prevision_date = NULL WHERE id = '$id'";
