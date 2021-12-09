@@ -44,7 +44,6 @@ if (empty($_SESSION['logged'])) {
                         timePicker: true,
                         timePicker24Hour: true,
                         timePickerIncrement: 15,
-                        minDate: new Date(new Date().setFullYear(new Date().getFullYear())),
                         locale: {
                             format: 'DD/MM/YYYY HH:mm'
                         }
