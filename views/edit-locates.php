@@ -39,7 +39,7 @@ if (empty($_SESSION['logged'])) {
             <input class="form-control" name="prevision_date" type="text"  id="week">
             <script type="text/javascript">
                 var nowDate = new Date();
-                var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours() + 3);
+                var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours() + 4);
 
                 $(function() {
                     $('input[name="prevision_date"]').daterangepicker( {
