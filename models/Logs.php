@@ -21,7 +21,11 @@ class Logs extends model
     {
         $array = array();
 
-        $sql = "SELECT description, created_at FROM logs l WHERE l.fk_locate_id = '$id' LIMIT 5";
+        $sql = "SELECT l.description, l.created_at, l.justification 
+        FROM logs l 
+        WHERE l.fk_locate_id = '$id'
+        ORDER BY l.id DESC 
+        LIMIT 500";
         $sql = $this->db->query($sql);
 
         if ($sql->rowCount() > 0) {

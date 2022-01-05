@@ -14,6 +14,7 @@ if (empty($_SESSION['logged'])) {
             <tr>
                 <th>Descrição</th>
                 <th>Data de Criação</th>
+                <th>Justificativa</th>
             </tr>
             </thead>
             <?php
@@ -22,6 +23,7 @@ if (empty($_SESSION['logged'])) {
                 <tr>
                     <td><?php echo $log['description']; ?></td>
                     <td><?php echo $log['created_at']; ?></td>
+                    <td><?php echo $log['justification']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

@@ -55,6 +55,12 @@ if (empty($_SESSION['logged'])) {
                 });
             </script>
         </div>
+        <div class="form-group">
+            <div class="title">
+                <label for="text">Justificativa</label><br/>
+            </div>
+            <textarea class="form-control" id="justification" name="justification" rows="3"></textarea>
+        </div>
 
         <br/>
 
