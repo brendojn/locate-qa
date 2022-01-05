@@ -79,7 +79,7 @@ class Locate extends model
 
         foreach ($array as $ar) {
             if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['user'] !== 'admin') {
-                $this->editLocate($ar['locate_id'], $isAdmin, NULL);
+                $this->editLocate($ar['locate_id'], $isAdmin, NULL, NULL);
             }
         }
 
