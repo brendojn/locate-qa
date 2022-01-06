@@ -52,7 +52,7 @@ class Locate extends model
         return $row['c'];
     }
 
-    public function getLocates($filters)
+    public function getLocates($filters, $userLogged)
     {
         $array = array();
 
@@ -79,7 +79,7 @@ class Locate extends model
 
         foreach ($array as $ar) {
             if ($ar['prevision_date'] < $date_now && $ar['prevision_date'] !== null && $ar['user'] !== 'admin') {
-                $this->editLocate($ar['locate_id'], $isAdmin, NULL, NULL);
+                $this->editLocate($ar['locate_id'], $isAdmin, $userLogged, NULL, NULL);
             }
         }
 
@@ -118,7 +118,6 @@ class Locate extends model
 
         $user_id = $array['id'];
         $user_name = $array['user'];
-
 
         $sql = "SELECT id, name FROM locate WHERE id = '$id'";
         $sql = $this->db->query($sql);

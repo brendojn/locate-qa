@@ -25,9 +25,11 @@ class locatesController extends controller
             $filters = $_GET['filters'];
         }
 
+        $userLogged = $u->getUser($_SESSION['logged']);
+
         $total_locates = $l->getTotalLocates($filters);
 
-        $locates = $l->getLocates($filters);
+        $locates = $l->getLocates($filters, $userLogged);
 
         $data['total_locates'] = $total_locates;
         $data['locates'] = $locates;
