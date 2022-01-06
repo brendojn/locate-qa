@@ -173,6 +173,7 @@ class Locate extends model
     {
         $u = new User();
         $isAdmin = $u->getUserByName('admin');
+        $user_name = $u->getUser($_SESSION['logged']);
 
         $sql = "SELECT id, name FROM locate WHERE id = '$id'";
         $sql = $this->db->query($sql);
