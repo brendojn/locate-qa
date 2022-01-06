@@ -103,7 +103,7 @@ class Locate extends model
         return $array;
     }
 
-    public function editLocate($id, $user, $prevision_date, $justification)
+    public function editLocate($id, $user, $userLogged, $prevision_date, $justification)
     {
         $array = array();
 
@@ -140,7 +140,7 @@ class Locate extends model
             $sql = $this->db->query($sql);
 
             $today = date("Y-m-d H:i:s");
-            $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today'";
+            $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado para o usuário $user_name pelo usuário $userLogged', created_at = '$today'";
             $sql = $this->db->query($sql);
 
             header("Location: " . BASE_URL . "locates");
@@ -151,7 +151,7 @@ class Locate extends model
 
 
         $today = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado pelo usuário $user_name', created_at = '$today', justification = '$justification'";
+        $sql = "INSERT INTO logs SET fk_locate_id = '$id', description = '[$locate_name] locado para o usuário $user_name pelo usuário $userLogged', created_at = '$today', justification = '$justification'";
         $sql = $this->db->query($sql);
 
         header("Location: " . BASE_URL . "locates");

@@ -63,12 +63,14 @@ class locatesController extends controller
         $l = new Locate();
         $u = new User();
 
+        $userLogged = $u->getUser($_SESSION['logged']);
+
         if (isset($_POST['prevision_date']) && !empty($_POST['prevision_date'])) {
             $user = addslashes($_POST['user']);
             $prevision_date = addslashes($_POST['prevision_date']);
             $justification = addslashes($_POST['justification']);
 
-            $l->editLocate($id, $user, $prevision_date, $justification);
+            $l->editLocate($id, $user, $userLogged, $prevision_date, $justification);
             header("Location: " . BASE_URL . "locates");
         }
 
